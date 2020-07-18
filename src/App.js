@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { dummyData, dummyDataTwo } from './data'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  return <Persons />
 }
 
-export default App;
+const Persons = ({ defaultData = dummyData }) => {
+  const [data, setData] = useState([...dummyData])
+  const [dataTwo, setDataTwo] = useState([...dummyDataTwo])
+
+  function switchData() {
+    setData([...dummyDataTwo])
+  }
+
+  function switchDataTwo() {
+    setData([...dummyData])
+  }
+
+  return (
+    <div>
+      {data.map((dataArray) => (
+        <ul key={dataArray.id}>
+          <li>{dataArray.name}</li>
+          <li>{dataArray.weapon}</li>
+        </ul>
+      ))}
+      <button onClick={switchData}>Click me</button>
+      <button onClick={switchDataTwo}>Click me</button>
+    </div>
+  )
+}
+
+export default App
